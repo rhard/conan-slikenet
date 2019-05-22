@@ -9,8 +9,8 @@ class RaknetConan(ConanFile):
     url = "https://github.com/rhard/RakNet"
     description = "SLikeNet is a cross platform, open source, C++ networking engine for game programmers"
     settings = "os", "compiler", "build_type", "arch"
-    options = {"fPIC": [True, False],"IPV6": [True, False]}
-    default_options = "fPIC=True","IPV6=False"
+    options = {"fPIC": [True, False],"IPV6": [True, False],"SEC": [True, False]}
+    default_options = "fPIC=True","IPV6=False","SEC=False"
     generators = "cmake"
 
     def source(self):
@@ -28,6 +28,8 @@ conan_basic_setup()''')
         cmake = CMake(self)
         if self.options.IPV6:
             cmake.definitions["RAKNET_SUPPORT_IPV6"] = "1"
+        if self.options.SEC:
+            cmake.definitions["LIBCAT_SECURITY"] = "1"    
         cmake.definitions["RAKNET_ENABLE_DEPENDENT_EXTENTIONS"] = "OFF"
         cmake.definitions["RAKNET_ENABLE_SAMPLES"] = "OFF"
         cmake.definitions["RAKNET_ENABLE_DLL"] = "OFF"
