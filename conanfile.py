@@ -44,6 +44,8 @@ conan_basic_setup()''')
         self.copy("*.h", dst="include", src="RakNet/Source")
         self.copy("*.lib", dst="lib", src="Lib", keep_path=False)
         self.copy("*.a", dst="lib", keep_path=False)
+        if self.options.SEC:
+            self.copy("*.*", dst="include/cat", src="RakNet/DependentExtensions/cat")
         if self.settings.compiler == "Visual Studio":
             lib_path = os.path.join(self.package_folder, "lib")
             current_lib = os.path.join(lib_path, "RakNetLibStaticd.lib")
