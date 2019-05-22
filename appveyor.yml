@@ -10,6 +10,7 @@ environment:
     CONAN_LOGIN_USERNAME: "rhard"
     CONAN_CHANNEL: "testing"
     CONAN_UPLOAD: "https://api.bintray.com/conan/rhard/conan"
+    CONAN_USE_ALWAYS_SHORT_PATHS: "1"
 
     matrix:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
