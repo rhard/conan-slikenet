@@ -23,13 +23,17 @@ class RaknetConan(ConanFile):
                               '''PROJECT(RakNet)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()''')
+        if self.options.IPV6:
+            tools.replace_in_file("RakNet/Source/include/slikenet/defineoverrides.h", "// USER EDITABLE FILE",
+'''// USER EDITABLE FILE
+#define RAKNET_SUPPORT_IPV6 1''')
+        if self.options.SEC:
+            tools.replace_in_file("RakNet/Source/include/slikenet/defineoverrides.h", "// USER EDITABLE FILE",
+'''// USER EDITABLE FILE
+#define LIBCAT_SECURITY 1''')
 
     def build(self):
         cmake = CMake(self)
-        if self.options.IPV6:
-            cmake.definitions["RAKNET_SUPPORT_IPV6"] = "1"
-        if self.options.SEC:
-            cmake.definitions["LIBCAT_SECURITY"] = "1"    
         cmake.definitions["RAKNET_ENABLE_DEPENDENT_EXTENTIONS"] = "OFF"
         cmake.definitions["RAKNET_ENABLE_SAMPLES"] = "OFF"
         cmake.definitions["RAKNET_ENABLE_DLL"] = "OFF"
